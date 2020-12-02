@@ -14,6 +14,8 @@ namespace SalesManagementMVC.Data
         {
         }
 
-        public DbSet<SalesManagementMVC.Models.Order> Order { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+
     }
 }
