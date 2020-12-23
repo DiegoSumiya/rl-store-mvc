@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesManagementMVC.Data;
 using SalesManagementMVC.Models;
+using SalesManagementMVC.Models.ViewModels;
+using SalesManagementMVC.Services;
 
 namespace SalesManagementMVC.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly SalesManagementMVCContext _context;
+        private readonly OrderService _orderService;
 
-        public OrdersController(SalesManagementMVCContext context)
+        public OrdersController(SalesManagementMVCContext context, OrderService orderService)
         {
             _context = context;
+            _orderService = orderService;
         }
 
         // GET: Orders
@@ -54,7 +58,7 @@ namespace SalesManagementMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CustomerId,Status,Total,Created,Updated,PaymentForm")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,CustomerId,Name,Status,Total,Created,Updated,PaymentForm")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +90,7 @@ namespace SalesManagementMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CustomerId,Status,Total,Created,Updated,PaymentForm")] Order order)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,CustomerId,Name,Status,Total,Created,Updated,PaymentForm")] Order order)
         {
             if (id != order.Id)
             {
@@ -148,6 +152,13 @@ namespace SalesManagementMVC.Controllers
         private bool OrderExists(string id)
         {
             return _context.Order.Any(e => e.Id == id);
+        }
+
+        public IActionResult InsertItem()
+        {
+            var orders = _orderService.FindAll();
+            var viewModel = new OrderFormViewModel { Orders = orders };
+            return View(viewModel);
         }
     }
 }

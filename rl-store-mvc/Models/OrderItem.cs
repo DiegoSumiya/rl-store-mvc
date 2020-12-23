@@ -10,7 +10,8 @@ namespace SalesManagementMVC.Models
         public double UnitValue { get; set; }
         public double Total { get; set; }
         public string ProductName { get; set; }
-        public Order Order{ get; set; }
+        public Order Order { get; set; }
+        public int OrderId { get; set; }
 
         public OrderItem()
         {

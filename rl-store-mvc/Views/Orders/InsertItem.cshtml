@@ -1,0 +1,58 @@
+﻿@model SalesManagementMVC.Models.ViewModels.OrderFormViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>OrderItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderItem.Id" class="control-label"></label>
+                <input asp-for="OrderItem.Id" class="form-control" />
+                <span asp-validation-for="OrderItem.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.Count" class="control-label"></label>
+                <input asp-for="OrderItem.Count" class="form-control" />
+                <span asp-validation-for="OrderItem.Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.UnitValue" class="control-label"></label>
+                <input asp-for="OrderItem.UnitValue" class="form-control" />
+                <span asp-validation-for="OrderItem.UnitValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.Total" class="control-label"></label>
+                <input asp-for="OrderItem.Total" class="form-control" />
+                <span asp-validation-for="OrderItem.Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.ProductName" class="control-label"></label>
+                <input asp-for="OrderItem.ProductName" class="form-control" />
+                <span asp-validation-for="OrderItem.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.OrderId" class="control-label"></label>
+                <select asp-for="OrderItem.OrderId" asp-items="@(new SelectList(Model.Orders,"Id","Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

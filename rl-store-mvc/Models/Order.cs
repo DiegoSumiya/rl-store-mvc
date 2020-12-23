@@ -10,10 +10,11 @@ namespace SalesManagementMVC.Models
     {
         public string Id { get; set; }
         public string CustomerId { get; set; }
+        public string Name { get; set; }
         public Status Status { get; set; }
         public double Total { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime Updated { get; set; } = DateTime.Now;
         public PaymentForm PaymentForm { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
@@ -21,10 +22,11 @@ namespace SalesManagementMVC.Models
         {
         }
 
-        public Order(string id, string customerId, Status status, double total, DateTime created, DateTime updated, PaymentForm paymentForm)
+        public Order(string id, string customerId, string name, Status status, double total, DateTime created, DateTime updated, PaymentForm paymentForm)
         {
             Id = id;
             CustomerId = customerId;
+            Name = name;
             Status = status;
             Total = total;
             Created = created;

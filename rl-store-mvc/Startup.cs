@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SalesManagementMVC.Data;
+using SalesManagementMVC.Services;
 
 namespace rl_store_mvc
 {
@@ -39,6 +40,8 @@ namespace rl_store_mvc
             services.AddDbContext<SalesManagementMVCContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesManagementMVCContext"), Builder =>
                     Builder.MigrationsAssembly("SalesManagementMVC")));
+
+            services.AddScoped<OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

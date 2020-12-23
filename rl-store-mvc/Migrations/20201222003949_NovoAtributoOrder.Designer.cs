@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesManagementMVC.Data;
 
 namespace SalesManagementMVC.Migrations
 {
     [DbContext(typeof(SalesManagementMVCContext))]
-    partial class SalesManagementMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20201222003949_NovoAtributoOrder")]
+    partial class NovoAtributoOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +50,7 @@ namespace SalesManagementMVC.Migrations
 
                     b.Property<int>("Count");
 
-                    b.Property<int>("OrderId");
-
-                    b.Property<string>("OrderId1");
+                    b.Property<string>("OrderId");
 
                     b.Property<string>("ProductName");
 
@@ -60,7 +60,7 @@ namespace SalesManagementMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItem");
                 });
@@ -69,7 +69,7 @@ namespace SalesManagementMVC.Migrations
                 {
                     b.HasOne("SalesManagementMVC.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }
