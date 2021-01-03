@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace SalesManagementMVC.Models.ViewModels
 {
-    public class OrderFormViewModel
+    public class OrderItemFormViewModel
     {
         public OrderItem OrderItem { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public string OrderId { get; set; }
     }
 }

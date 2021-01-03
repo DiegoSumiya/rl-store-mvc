@@ -1,4 +1,4 @@
-﻿@model SalesManagementMVC.Models.ViewModels.OrderFormViewModel
+﻿@model SalesManagementMVC.Models.ViewModels.OrderItemFormViewModel
 
 
 @{
@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateItem">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OrderItem.Id" class="control-label"></label>
@@ -39,8 +39,8 @@
                 <span asp-validation-for="OrderItem.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OrderItem.OrderId" class="control-label"></label>
-                <select asp-for="OrderItem.OrderId" asp-items="@(new SelectList(Model.Orders,"Id","Name"))" class="form-control"></select>
+                <label asp-for="OrderId" class="control-label"></label>
+                <select asp-for="OrderId" asp-items="@(new SelectList(Model.Orders,"Id","Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

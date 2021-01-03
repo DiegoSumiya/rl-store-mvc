@@ -36,15 +36,17 @@ namespace SalesManagementMVC.Controllers
             {
                 return NotFound();
             }
-
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            var order = await _context.Order.FirstOrDefaultAsync(m => m.Id == id);
+           
+            
             if (order == null)
             {
                 return NotFound();
             }
-
-            return View(order);
+            var orderItem = await _context.OrderItem.Where(m => m.Order.Id == id).ToListAsync();
+            var viewModel = new OrderDetailsFormViewModel { Order = order , OrderItems = orderItem};
+            return View(viewModel);
         }
 
         // GET: Orders/Create
@@ -68,6 +70,7 @@ namespace SalesManagementMVC.Controllers
             }
             return View(order);
         }
+
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -157,8 +160,51 @@ namespace SalesManagementMVC.Controllers
         public IActionResult InsertItem()
         {
             var orders = _orderService.FindAll();
-            var viewModel = new OrderFormViewModel { Orders = orders };
+            var viewModel = new OrderItemFormViewModel { Orders = orders };
             return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateItem(OrderItem orderItem)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(orderItem);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(orderItem);
+        }
+
+        // GET: OrderITem/Delete/5
+        public async Task<IActionResult> DeleteItem(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var orderItem = await _context.OrderItem
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (orderItem == null)
+            {
+                return NotFound();
+            }
+
+            return View(orderItem);
+        }
+
+        // POST: OrderItem/Delete/5
+        [HttpPost, ActionName("DeleteItem")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteItemConfirmed(string id)
+        {
+            var orderItem = await _context.OrderItem.FindAsync(id);
+            _context.OrderItem.Remove(orderItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

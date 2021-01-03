@@ -1,4 +1,4 @@
-﻿@model SalesManagementMVC.Models.Order
+﻿@model SalesManagementMVC.Models.OrderItem
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Order</h4>
+    <h4>Order Item</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,22 +18,22 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
-            Name
+            Count
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Count)
         </dd>
         <dt>
-            Customer Id
+            Unit Value
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerId)
+            @Html.DisplayFor(model => model.UnitValue)
         </dd>
         <dt>
-            Status
+            Product Name
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.ProductName)
         </dd>
         <dt>
             Total
@@ -41,27 +41,9 @@
         <dd>
             @Html.DisplayFor(model => model.Total)
         </dd>
-        <dt>
-            Created
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-        <dt>
-            Updated
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
-        <dt>
-            Payment Form
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PaymentForm)
-        </dd>
     </dl>
-    
-    <form asp-action="Delete">
+
+    <form asp-action="DeleteItem">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>

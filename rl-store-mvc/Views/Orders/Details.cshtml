@@ -1,4 +1,5 @@
-﻿@model SalesManagementMVC.Models.Order
+﻿@model SalesManagementMVC.Models.ViewModels.OrderDetailsFormViewModel
+
 
 @{
     ViewData["Title"] = "Details";
@@ -11,56 +12,104 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            Id
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Order.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            Customer Id
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerId)
+            @Html.DisplayFor(model => model.Order.CustomerId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Order.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Order.Status)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Total)
+            Total
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Total)
+            @Html.DisplayFor(model => model.Order.Total)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Created)
+            Created
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Created)
+            @Html.DisplayFor(model => model.Order.Created)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Updated)
+            Updated
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Updated)
+            @Html.DisplayFor(model => model.Order.Updated)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PaymentForm)
+            Payment Form
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PaymentForm)
+            @Html.DisplayFor(model => model.Order.PaymentForm)
         </dd>
     </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Count
+                </th>
+                <th>
+                    Unit value
+                </th>
+                <th>
+                    Product name
+                </th>
+                <th>
+                    Total
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Order.Id">Edit</a> |
+                    <a asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Order.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
